@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Chart -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="bg-light" id="body">
+
+<!-- LOGIN PAGE -->
+<div class="container vh-100 d-flex justify-content-center align-items-center" id="loginPage">
+
+    <div class="card shadow p-4" style="width:350px;">
+        <h3 class="text-center mb-3">Admin Login</h3>
+
+        <input type="text" class="form-control mb-3" placeholder="Username">
+        <input type="password" class="form-control mb-3" placeholder="Password">
+
+        <button class="btn btn-primary w-100" onclick="login()">Login</button>
+    </div>
+
+</div>
+
+
+
+<!-- DASHBOARD -->
+<div class="container-fluid d-none" id="dashboard">
+
+    <div class="row">
+
+        <!-- Sidebar -->
+        <div class="col-md-3 col-lg-2 bg-dark text-white min-vh-100 p-3">
+
+            <h4 class="text-center mb-4">🛍 Admin</h4>
+
+            <ul class="nav flex-column">
+
+                <li class="nav-item mb-2">
+                    <a class="nav-link text-white bg-primary rounded" href="#">
+                        <i class="bi bi-speedometer2 me-2"></i> Dashboard
+                    </a>
+                </li>
+
+                <li class="nav-item mb-2">
+                    <a class="nav-link text-white" href="#">
+                        <i class="bi bi-bag me-2"></i> Orders
+                    </a>
+                </li>
+
+                <li class="nav-item mb-2">
+                    <a class="nav-link text-white" href="#">
+                        <i class="bi bi-box-seam me-2"></i> Products
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+
+        <!-- Main -->
+        <div class="col-md-9 col-lg-10 p-0">
+
+            <!-- Navbar -->
+            <nav class="navbar bg-white shadow-sm px-4">
+
+                <h5>Dashboard</h5>
+
+                <div class="ms-auto d-flex align-items-center gap-3">
+
+                    <!-- Dark Mode -->
+                    <button class="btn btn-outline-secondary" onclick="toggleDark()">
+                        <i class="bi bi-moon"></i>
+                    </button>
+
+                    <!-- Notification -->
+                    <i class="bi bi-bell fs-4"></i>
+
+                    <!-- Profile -->
+                    <div class="dropdown">
+
+                        <img src="https://via.placeholder.com/40"
+                             class="rounded-circle"
+                             data-bs-toggle="dropdown"
+                             style="cursor:pointer;">
+
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><hr></li>
+                            <li><a class="dropdown-item text-danger" href="#" onclick="logout()">Logout</a></li>
+                        </ul>
+
+                    </div>
+
+                    <button class="btn btn-primary"
+                            data-bs-toggle="modal"
+                            data-bs-target="#productModal">
+                        Add Product
+                    </button>
+
+                </div>
+
+            </nav>
+
+
+            <div class="p-4">
+
+                <!-- Cards -->
+                <div class="row g-4 mb-4">
+
+                    <!-- Orders -->
+                    <div class="col-md-6 col-xl-3">
+                        <div class="card shadow border-0 h-100">
+
+                            <div class="card-header bg-primary text-white text-center">
+                                Total Orders
+                            </div>
+
+                            <div class="card-body text-center">
+
+                                <div class="bg-primary text-white rounded-circle d-inline-flex justify-content-center align-items-center mb-3"
+                                     style="width:60px;height:60px;">
+                                    <i class="bi bi-bag fs-4"></i>
+                                </div>
+
+                                <h3 class="text-primary">1,245</h3>
+                                <p class="text-muted">Orders this month</p>
+
+                                <span class="badge bg-success">+12%</span>
+
+                            </div>
+
+                            <div class="card-footer text-center text-muted">
+                                Updated Today
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <!-- Revenue -->
+                    <div class="col-md-6 col-xl-3">
+                        <div class="card shadow border-0 h-100">
+
+                            <div class="card-header bg-success text-white text-center">
+                                Revenue
+                            </div>
+
+                            <div class="card-body text-center">
+
+                                <div class="bg-success text-white rounded-circle d-inline-flex justify-content-center align-items-center mb-3"
+                                     style="width:60px;height:60px;">
+                                    <i class="bi bi-currency-dollar fs-4"></i>
+                                </div>
+
+                                <h3 class="text-success">$32,450</h3>
+                                <p class="text-muted">Monthly earnings</p>
+
+                                <span class="badge bg-primary">+8%</span>
+
+                            </div>
+
+                            <div class="card-footer text-center text-muted">
+                                Updated Today
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <!-- Customers -->
+                    <div class="col-md-6 col-xl-3">
+                        <div class="card shadow border-0 h-100">
+
+                            <div class="card-header bg-warning text-dark text-center">
+                                Customers
+                            </div>
+
+                            <div class="card-body text-center">
+
+                                <div class="bg-warning text-dark rounded-circle d-inline-flex justify-content-center align-items-center mb-3"
+                                     style="width:60px;height:60px;">
+                                    <i class="bi bi-people fs-4"></i>
+                                </div>
+
+                                <h3 class="text-warning">845</h3>
+                                <p class="text-muted">New customers</p>
+
+                                <span class="badge bg-success">New</span>
+
+                            </div>
+
+                            <div class="card-footer text-center text-muted">
+                                Updated Today
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <!-- Deliveries -->
+                    <div class="col-md-6 col-xl-3">
+                        <div class="card shadow border-0 h-100">
+
+                            <div class="card-header bg-danger text-white text-center">
+                                Deliveries
+                            </div>
+
+                            <div class="card-body text-center">
+
+                                <div class="bg-danger text-white rounded-circle d-inline-flex justify-content-center align-items-center mb-3"
+                                     style="width:60px;height:60px;">
+                                    <i class="bi bi-truck fs-4"></i>
+                                </div>
+
+                                <h3 class="text-danger">56</h3>
+                                <p class="text-muted">Pending shipments</p>
+
+                                <span class="badge bg-danger">Pending</span>
+
+                            </div>
+
+                            <div class="card-footer text-center text-muted">
+                                Updated Today
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- Small Chart -->
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="card shadow border-0">
+                            <div class="card-body">
+                                <h5>Sales Overview</h5>
+                                <canvas id="salesChart" height="200"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="productModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5>Add Product</h5>
+                <button class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+
+                <input type="text" class="form-control mb-3" placeholder="Product Name">
+                <input type="number" class="form-control mb-3" placeholder="Price">
+
+                <button class="btn btn-primary w-100">Save</button>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Scripts -->
+<script>
+
+function login(){
+    document.getElementById("loginPage").classList.add("d-none");
+    document.getElementById("dashboard").classList.remove("d-none");
+}
+
+function logout(){
+    document.getElementById("dashboard").classList.add("d-none");
+    document.getElementById("loginPage").classList.remove("d-none");
+}
+
+function toggleDark(){
+    document.getElementById("body").classList.toggle("bg-dark");
+    document.getElementById("body").classList.toggle("text-white");
+}
+
+const ctx = document.getElementById('salesChart');
+
+new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: ['Jan','Feb','Mar','Apr','May','Jun'],
+        datasets: [{
+            label: 'Sales',
+            data: [1200,1900,3000,2500,3200,4000],
+            borderWidth: 2,
+            fill: true
+        }]
+    }
+});
+
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
