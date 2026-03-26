@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ultimate Bootstrap Page</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        body {
+            transition: 0.5s;
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+        }
+
+        .dark-mode {
+            background: linear-gradient(to right, #141e30, #243b55);
+            color: white;
+        }
+
+        .card {
+            border-radius: 20px;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .fade-in {
+            animation: fadeIn 1.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body id="pageBody">
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <i class="bi bi-lightning-charge"></i> MyPage
+        </a>
+    </div>
+</nav>
+
+<div class="container mt-5 fade-in">
+
+    <h1 class="text-center mb-4 text-primary">
+        <i class="bi bi-stars"></i> Ultimate Webpage
+    </h1>
+
+    <div class="row">
+
+        <!-- Form Section -->
+        <div class="col-md-6">
+            <div class="card p-4 shadow">
+                <h4><i class="bi bi-person"></i> Contact Form</h4>
+
+                <form onsubmit="return validateForm()">
+                    <input type="text" id="name" class="form-control mt-3" placeholder="Enter Name">
+                    <input type="email" id="email" class="form-control mt-3" placeholder="Enter Email">
+
+                    <button class="btn btn-primary mt-3 w-100">Submit</button>
+                </form>
+            </div>
+        </div>
+
+            </div>
+
+    <!-- Controls -->
+    <div class="text-center mt-4">
+        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#infoModal">
+            <i class="bi bi-chat-dots"></i> Show Message
+        </button>
+
+        <div class="form-check form-switch d-inline-block ms-3">
+            <input class="form-check-input" type="checkbox" onclick="toggleTheme()">
+            <label>Dark Mode</label>
+        </div>
+    </div>
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="infoModal">
+    <div class="modal-dialog">
+        <div class="modal-content bg-primary text-white">
+
+            <div class="modal-header">
+                <h5><i class="bi bi-lightbulb"></i> Motivation</h5>
+                <button class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                Push yourself, because no one else is going to do it for you 🚀
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-light" data-bs-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    function toggleTheme() {
+        document.getElementById("pageBody").classList.toggle("dark-mode");
+    }
+
+    function validateForm() {
+        let name = document.getElementById("name").value;
+        let email = document.getElementById("email").value;
+
+        if (name === "" || email === "") {
+            alert("Please fill all fields!");
+            return false;
+        }
+
+        alert("Form submitted successfully!");
+        return false;
+    }
+
+    function addTask() {
+        let task = document.getElementById("taskInput").value;
+
+        if (task === "") return;
+
+        let li = document.createElement("li");
+        li.className = "list-group-item d-flex justify-content-between align-items-center";
+        li.innerHTML = task + " <button class='btn btn-danger btn-sm' onclick='this.parentElement.remove()'>Delete</button>";
+
+        document.getElementById("taskList").appendChild(li);
+        document.getElementById("taskInput").value = "";
+    }
+</script>
+
+</body>
+</html>
